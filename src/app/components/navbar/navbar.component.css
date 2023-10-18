@@ -1,0 +1,11 @@
+
+
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.navbar-toggler .button {
+  font-weight: bold !important;
+}

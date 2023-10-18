@@ -1,0 +1,170 @@
+<div class="mainContainer">
+
+    <div class="welcome">
+        <h1>Bienvenue</h1>
+        <p>Afin de découvrir toutes les astuces de notre communauté de voyageurs, votre passeport est essentiel. 
+            Créez vite le vôtre !</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="name-container" style="display: flex; justify-content: space-between;">
+            <div class="form-group" style="width: 48%;">
+                <label for="firstName">Prénom</label>
+                <input type="text" id="firstName" formControlName="first_name" class="form-control"
+                    [ngClass]="{'border-danger': registerForm.controls['first_name'].invalid && registerForm.controls['first_name'].touched}"
+                    [attr.aria-invalid]="registerForm.controls['first_name'].invalid ? 'true' : 'false'"
+                    aria-describedby="firstNameError">
+                <div class="text-danger small" id="firstNameError"
+                    *ngIf="registerForm.controls['first_name'].invalid && registerForm.controls['first_name'].touched">
+                    Le prénom est requis.
+                </div>
+            </div>
+            <div class="form-group" style="width: 48%;">
+                <label for="lastName">Nom</label>
+                <input type="text" id="lastName" formControlName="last_name" class="form-control"
+                    [ngClass]="{'border-danger': registerForm.controls['last_name'].invalid && registerForm.controls['last_name'].touched}"
+                    [attr.aria-invalid]="registerForm.controls['last_name'].invalid ? 'true' : 'false'"
+                    aria-describedby="lastNameError">
+                <div class="text-danger small" id="lastNameError"
+                    *ngIf="registerForm.controls['last_name'].invalid && registerForm.controls['last_name'].touched">
+                    Le nom est requis.
+                </div>
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <label for="pseudo">Pseudo</label>
+            <input type="text" id="pseudo" formControlName="pseudo" class="form-control"
+                [ngClass]="{'border-danger': registerForm.controls['pseudo'].invalid && registerForm.controls['pseudo'].touched}"
+                [attr.aria-invalid]="registerForm.controls['pseudo'].invalid ? 'true' : 'false'" 
+                aria-describedby="pseudoError">
+            <div class="text-danger small" id="pseudoError"
+                *ngIf="registerForm.controls['pseudo'].invalid && registerForm.controls['pseudo'].touched">
+                Le pseudo est requis.
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="biography">Biographie</label>
+            <textarea id="biography" formControlName="biography" class="form-control"
+                [ngClass]="{'border-danger': registerForm.controls['biography'].invalid && registerForm.controls['biography'].touched}"
+                [attr.aria-invalid]="registerForm.controls['biography'].invalid ? 'true' : 'false'"
+                aria-describedby="biographyError">
+                    </textarea>
+            <div class="text-danger small" id="biographyError"
+                *ngIf="registerForm.controls['biography'].invalid && registerForm.controls['biography'].touched">
+                Un "Bonjour" suffira si vous ne souhaitez pas en dire plus.
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control"
+                [ngClass]="{'border-danger': registerForm.controls['email'].invalid && registerForm.controls['email'].touched}"
+                [attr.aria-invalid]="registerForm.controls['email'].invalid ? 'true' : 'false'" 
+                aria-describedby="emailError">
+            <div class="text-danger small" id="emailError"
+                *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+                L'email est requis.
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="password" class="form-control"
+                [ngClass]="{'border-danger': registerForm.controls['password'].invalid && registerForm.controls['password'].touched}"
+                [attr.aria-invalid]="registerForm.controls['password'].invalid ? 'true' : 'false'"
+                aria-describedby="passwordError">
+            <div class="text-danger small" id="passwordError"
+                *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+                Le mot de passe est requis.
+            </div>
+            <div class="text-danger small" id="passwordError"
+                *ngIf="registerForm.controls['password'].errors?.['pattern'] && registerForm.controls['password'].touched">
+                12 caractères minimum, 1 majuscule, 1 chiffre, 1 symbole.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirmer le mot de passe</label>
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control"
+                [attr.aria-invalid]="registerForm.controls['confirmPassword'].invalid ? 'true' : 'false'"
+                aria-describedby="confirmPasswordError">
+            <div class="text-danger small" id="confirmPasswordError"
+                *ngIf="registerForm.controls['confirmPassword'].invalid && registerForm.controls['confirmPassword'].touched">
+                La confirmation du mot de passe est requise.
+            </div>
+            <div class="text-danger small" id="confirmPasswordError"
+                *ngIf="passwordMismatch && registerForm.controls['confirmPassword'].touched">
+                Les mots de passe ne correspondent pas.
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary center-button" style="background-color: #EF4321; border: none;">S'inscrire</button>
+        </form>
+
+        <div class="lienLogin">
+            <p>
+                Déjà un compte ?
+                <a [routerLink]="['/mon compte/login']">Connectez-vous</a>
+            </p>
+        </div>
+        </div>
+
+
+
+
+
+
+
+<!-- <div class="mainContainer">
+
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="name-container" style="display: flex; justify-content: space-between;">
+    <div class="form-group" style="width: 48%;">
+        <label for="firstName">Prénom</label>
+        <input type="text" id="firstName" formControlName="first_name" class="form-control">
+        <div *ngIf="registerForm.controls['first_name'].invalid && registerForm.controls['first_name'].touched">
+            Le prénom est requis.
+        </div>
+    </div>
+    <div class="form-group" style="width: 48%;">
+        <label for="lastName">Nom</label>
+        <input type="text" id="lastName" formControlName="last_name" class="form-control">
+        <div *ngIf="registerForm.controls['last_name'].invalid && registerForm.controls['last_name'].touched">
+            Le nom est requis.
+        </div>
+    </div>
+    </div>
+    <div class="form-group">
+        <label for="pseudo">Pseudo</label>
+        <input type="text" id="pseudo" formControlName="pseudo" class="form-control">
+        <div *ngIf="registerForm.controls['pseudo'].invalid && registerForm.controls['pseudo'].touched">
+            Le pseudo est requis.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="biography">Biographie</label>
+        <textarea id="biography" formControlName="biography" class="form-control"></textarea>
+        <div *ngIf="registerForm.controls['biography'].invalid && registerForm.controls['biography'].touched">
+            Un "Bonjour" suffira si vous ne souhaitez pas en dire plus.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control">
+        <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+            L'email est requis.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control">
+        <div *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+            Le mot de passe est requis.
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">S'inscrire</button>
+</form>
+</div> -->

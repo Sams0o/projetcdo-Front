@@ -1,0 +1,58 @@
+:host {
+  height: 100vh;
+  background: linear-gradient(to bottom, #4093CE, #006BB7);
+  display: block; /* Important pour appliquer un fond à :host */
+}
+
+.welcome h1 {
+   color: white;
+  text-align: center;
+}
+
+.welcome p {
+  color: white;
+  text-align: justify;
+  width: 65vw;
+}
+
+.mainContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+}
+
+input {
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 0.7rem;
+  width: 60vw;
+}
+
+/* div.form-group {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+} */
+
+.text-danger.small {
+  font-size: 0.7em;
+  color: rgb(12, 92, 40);
+}
+
+.center-button {
+  display: block;
+  font-size: 0.8rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 30%;
+}
+
+.lienLogin {
+  color: white;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+}
+
+a {
+  color: #ef4321;
+}

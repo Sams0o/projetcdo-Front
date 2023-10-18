@@ -1,0 +1,51 @@
+<div class="mainContainer">
+
+    <div class="welcome">
+        <h1>Content de vous revoir !</h1>
+        <p>Ne manquez rien des astuces voyage de la communauté. 
+            Restez informé en vous identifiant.</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control"
+                [ngClass]="{'border-danger': loginForm.controls['email'].invalid && loginForm.controls['email'].touched}"
+                [attr.aria-invalid]="loginForm.controls['email'].invalid ? 'true' : 'false'"
+                aria-describedby="emailError">
+            <div class="text-danger small" id="emailError"
+                *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
+                L'email est requis.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="password" class="form-control"
+                [ngClass]="{'border-danger': loginForm.controls['password'].invalid && loginForm.controls['password'].touched}"
+                [attr.aria-invalid]="loginForm.controls['password'].invalid ? 'true' : 'false'"
+                aria-describedby="passwordError">
+            <div class="text-danger small" id="passwordError"
+                *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+                Le mot de passe est requis.
+            </div>
+            <div class="text-danger small" id="passwordError"
+                *ngIf="loginForm.controls['password'].errors?.['pattern'] && loginForm.controls['password'].touched">
+                12 caractères minimum, 1 majuscule, 1 chiffre, 1 symbole.
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary center-button"
+            style="background-color: #EF4321; border: none;">Se connecter</button>
+    </form>
+
+    <div class="lienLogin">
+        <p>
+            Pas de compte ?
+            <a [routerLink]="['/mon-compte/register']">Inscrivez-vous</a>
+        </p>
+    </div>
+</div>
+
