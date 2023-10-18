@@ -9,8 +9,8 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="name-container" style="display: flex; justify-content: space-between;">
             <div class="form-group" style="width: 48%;">
-                <label for="firstName">Prénom</label>
-                <input type="text" id="firstName" formControlName="first_name" class="form-control"
+                <label for="floatingFirstname"></label>
+                <input type="text" class="form-control" id="floatingFirstname" placeholder="Prénom" formControlName="first_name" 
                     [ngClass]="{'border-danger': registerForm.controls['first_name'].invalid && registerForm.controls['first_name'].touched}"
                     [attr.aria-invalid]="registerForm.controls['first_name'].invalid ? 'true' : 'false'"
                     aria-describedby="firstNameError">
@@ -20,8 +20,8 @@
                 </div>
             </div>
             <div class="form-group" style="width: 48%;">
-                <label for="lastName">Nom</label>
-                <input type="text" id="lastName" formControlName="last_name" class="form-control"
+                <label for="FloatingLastName"></label>
+                <input type="text" id="FloatingLastName" placeholder="Nom" formControlName="last_name" class="form-control"
                     [ngClass]="{'border-danger': registerForm.controls['last_name'].invalid && registerForm.controls['last_name'].touched}"
                     [attr.aria-invalid]="registerForm.controls['last_name'].invalid ? 'true' : 'false'"
                     aria-describedby="lastNameError">
@@ -95,7 +95,7 @@
                 La confirmation du mot de passe est requise.
             </div>
             <div class="text-danger small" id="confirmPasswordError"
-                *ngIf="passwordMismatch && registerForm.controls['confirmPassword'].touched">
+                *ngIf="passwordMismatch">
                 Les mots de passe ne correspondent pas.
             </div>
         </div>

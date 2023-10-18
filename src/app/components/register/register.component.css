@@ -1,7 +1,8 @@
-:host {
-  height: 100vh;
-  background: linear-gradient(to top, #4093CE, #006BB7);
-  display: block; /* Important pour appliquer un fond à :host */
+body {
+background-image: url("/src/assets/Images/bg_blueWithAccessory.jpg");
+background-size: cover;  
+background-repeat: no-repeat;  
+background-position: center center; 
 }
 
 .mainContainer {
@@ -12,13 +13,13 @@
 }
 
 .welcome p {
-  color: white;
+  color: black;
   text-align: justify;
   width: 65vw;
 }
 
 .welcome h1 {
-   color: white;
+  color: black;
   text-align: center;
 }
 
