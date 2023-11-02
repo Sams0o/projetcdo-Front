@@ -4,12 +4,16 @@ import { User } from '../models/user.model';
 import { UserLogin } from '../models/userLogin.model';
 import { LoginResponse } from '../models/loginResponse.model';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    ) {}
 
   setHeaders() {
     const jwtToken = localStorage.getItem('token');
@@ -37,5 +41,10 @@ export class UserService {
     return this.http.get<User>(`http://localhost:3000/api/auth`, {
       headers,
     });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/connexion/login'])
   }
 }

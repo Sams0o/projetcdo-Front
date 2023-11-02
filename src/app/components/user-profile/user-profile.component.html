@@ -4,9 +4,9 @@
         <h1>Bienvenue dans votre espace <span>{{ user.pseudo }}</span></h1>
         <h2 class="subHeading">Un petit mot sur vous :</h2>
         <p>"{{ user.biography }}"</p>
-        <button class="buttonEspace" (click)="link()">Créer une expérience</button>
-        <button class="buttonEspace" (click)="link()">Paramètres</button>
-        <button class="buttonEspace" (click)="link()">Déconnection</button>
+        <button class="buttonEspace" (click)="link()">Ajouter une expérience</button>
+        <button class="buttonEspace" (click)="link()">Gérer mon profil</button>
+        <button class="buttonEspace" (click)="logout()">Se déconnecter</button>
     </div>
 </div>
 

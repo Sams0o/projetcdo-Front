@@ -20,14 +20,20 @@ export class UserProfileComponent implements OnInit {
     // console.log(this.user);
   }
 
-  link() {
-    this.router.navigate(['/profil/user-profile/settings']);
-  }
   getDataUserProfil() {
     this.userService.getUserById().subscribe((data) => {
       this.user = data;
       this.experiences = data.experiences;
       // console.log('moncul ' + JSON.stringify(data));
     });
+  }
+  // Lien qui permet à l'utilisateur de modifier ses données personnelles
+  link() {
+    this.router.navigate(['/profil/user-profile/settings']);
+  }
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/connexion/login']);
   }
 }
