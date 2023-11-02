@@ -21,19 +21,21 @@ export class UserService {
 
   registerUser(data: User) {
     console.log('registerUser', data);
-    return this.http
-      .post(`http://localhost:3000/api/auth/register`, data);
+    return this.http.post(`http://localhost:3000/api/auth/register`, data);
   }
 
   loginUser(data: UserLogin): Observable<LoginResponse> {
     console.log('loginUser', data);
-    return this.http.post<LoginResponse>(`http://localhost:3000/api/auth/login`, data);
+    return this.http.post<LoginResponse>(
+      `http://localhost:3000/api/auth/login`,
+      data
+    );
   }
 
-  // registerUser(data: User) {
-  //   console.log('Service', data);
-  //   return this.http
-  //     .post(`http://localhost:3000/api/auth/register`, data)
-  //     .subscribe((res) => console.log(res));
-  // }
+  getUserById(): Observable<User> {
+    const headers = this.setHeaders();
+    return this.http.get<User>(`http://localhost:3000/api/auth`, {
+      headers,
+    });
+  }
 }

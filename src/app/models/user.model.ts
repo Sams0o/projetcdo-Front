@@ -1,11 +1,13 @@
+import { Experience } from './experience';
 export interface User {
   id?: number;
-  nom: string;
-  prenom: string;
+  first_name: string;
+  last_name: string;
   pseudo: string;
   biography: string;
   email: string;
   password?: string;
   password_confirm?: string;
-  admin: boolean;
+  admin?: boolean;
+  experiences: Experience[];
 }

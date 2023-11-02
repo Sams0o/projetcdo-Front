@@ -26,16 +26,17 @@ export class LoginComponent {
       const user = this.loginForm.value;
       this.userService.loginUser(user).subscribe({
         next: (res) => {
-          console.log("Connexion réussie :", res);
-         
           localStorage.setItem('token', res.accessToken);
-          location.reload(); // Recharge la page actuelle
+          alert('Connexion réussie !');
+          this.router.navigate(['/profil/user-profile']);
         },
         error: (error) => {
-          console.log("Erreur lors de la connextion", );
-          
-        }
-      })
+          console.error(
+            "Une erreur s'est produite lors de la connexion :",
+            error
+          );
+        },
+      });
     }
   }
 }

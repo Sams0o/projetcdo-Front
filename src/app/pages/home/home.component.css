@@ -1,0 +1,112 @@
+/* Styles pour l'en-tête */
+header {
+    background-image: url("/assets/Images/banniere1.jpg");
+    background-size: cover;
+    background-position: center center;
+    color: #006BB7;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.header-text {
+    font-size: 2rem;
+    text-align: left;
+    width: 60%;
+}
+
+/* Styles pour la section de présentation */
+.presentation {
+    background-color: #006BB7;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.presentation p {
+    font-size: 1.120rem;
+}
+
+/* Styles pour la section "Ce que nous faisons" */
+.ce-que-nous-faisons {
+    text-align: center;
+    padding: 1rem;
+}
+
+.ce-que-nous-faisons h2 {
+    color: #006BB7;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+span {
+    color: #ef4321;
+    font-weight: 700;
+}
+.ce-que-nous-faisons li {
+    font-size: 1.120rem;
+    margin: 0.7rem;
+}
+
+/* Styles pour la section "Découvrez et Explorez" */
+.decouvrez-et-explorez {
+    background-color: #f7f7f7;
+    text-align: center;
+    padding: 1rem;
+}
+
+.decouvrez-et-explorez h2 {
+    color: #006BB7;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.decouvrez-et-explorez p {
+   font-size: 1.120rem;
+}
+
+/* Styles pour la section d'appel à l'action */
+.appel-a-laction {
+    text-align: center;
+    padding: 1rem;
+}
+
+.appel-a-laction h2 {
+    font-size: 1.4rem;
+}
+
+button {
+  background-color: #ef4321;
+  color: white;
+  border-radius: 0.7rem;
+  padding: 0.6rem 0.9rem;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.cta-button:hover {
+    background-color: #ef4321;
+}
+
+/* Styles pour le pied de page */
+/* footer {
+    background-color: #006BB7;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+} */

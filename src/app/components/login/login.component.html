@@ -2,8 +2,6 @@
 
     <div class="welcome">
         <h1>Content de vous revoir !</h1>
-        <p>Ne manquez rien des astuces voyage de la communauté. 
-            Restez informé en vous identifiant.</p>
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -37,14 +35,13 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary center-button"
-            style="background-color: #EF4321; border: none;">Se connecter</button>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
     </form>
 
-    <div class="lienLogin">
+    <div class="linkRegister">
         <p>
             Pas de compte ?
-            <a [routerLink]="['/mon-compte/register']">Inscrivez-vous</a>
+            <a [routerLink]="['/connexion/register']">Inscrivez-vous</a>
         </p>
     </div>
 </div>

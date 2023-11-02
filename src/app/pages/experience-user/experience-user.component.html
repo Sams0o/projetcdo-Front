@@ -1,0 +1,11 @@
+<div class="experience-details">
+    <h2>{{ experience.title }}</h2>
+    <p>{{ experience.description }}</p>
+    <p>Lieu : {{ experience.city }}</p>
+    <p>Date de publication : {{ experience.publication_date | date }}</p>
+    <p>Date de voyage : {{ experience.travel_date | date }}</p>
+    <p>Pays : {{ getCountryDisplayList(experience) }}</p>
+    <a [routerLink]="['/experiences']" class="btn btn-primary">Revenir à la liste des expériences</a>
+
+</div>
+

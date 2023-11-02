@@ -2,6 +2,10 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.navbar-brand {
+  font-weight: 600;
+}
+
 .navbar-toggler:focus {
   outline: none;
   box-shadow: none;

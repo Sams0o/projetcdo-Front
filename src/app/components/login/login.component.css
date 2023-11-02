@@ -1,58 +1,50 @@
-:host {
-  height: 100vh;
-  background: linear-gradient(to bottom, #4093CE, #006BB7);
-  display: block; /* Important pour appliquer un fond à :host */
-}
-
-.welcome h1 {
-   color: white;
-  text-align: center;
-}
-
-.welcome p {
-  color: white;
-  text-align: justify;
-  width: 65vw;
-}
 
 .mainContainer {
+  background-image: url("/assets/Images/BgYellow1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   align-items: center;
   display: flex;
   flex-direction: column;
   padding: 3rem;
 }
 
-input {
-  cursor: pointer;
-  margin-top: 1rem;
-  padding: 0.7rem;
-  width: 60vw;
+.welcome {
+  color: black;
+  text-align: center;
+  width: 45vw;
 }
 
-/* div.form-group {
+div.form-group {
   font-size: 0.9rem;
+  font-weight: 500;
   margin-bottom: 1rem;
-} */
+  width: 45vw;
+}
 
 .text-danger.small {
   font-size: 0.7em;
   color: rgb(12, 92, 40);
 }
 
-.center-button {
+.btn {
+  background-color: #EF4321; 
+  border: none;
   display: block;
   font-size: 0.8rem;
   margin: 0 auto;
-  margin-top: 1rem;
   width: 30%;
 }
 
-.lienLogin {
+.linkRegister {
   color: white;
   font-size: 0.8rem;
+  font-weight: 450;
   margin-top: 1rem;
 }
 
 a {
   color: #ef4321;
+  font-weight: 600;
 }

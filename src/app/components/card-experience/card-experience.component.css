@@ -1,42 +1,49 @@
-
-.profile-container {
+/* .profile-banner {
+  background: linear-gradient(to bottom, #025591, #4093ce);
+  padding: 1.5rem 0rem 0rem 2.5rem;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+} */
+
+/* .circlePseudo {
+  display: flex;
+ 
   flex-direction: column;
-}
+  justify-content: center;
+  align-items: center;
+} */
 
-.userEspace {
-  flex: 1;
-  background-color: #f2f2f2;
-  padding: 1.1rem 1rem;
+/* .circle {
+  width: 10rem;
+  height: 10rem;
+  background-color: white;
+  border-radius: 50%;
   text-align: center;
-}
-.userEspace p {
-  font-style: italic;
-}
-
-span {
-  color: #EF4321;
+  line-height: 9rem;
+  font-size: 5rem;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.689);
 }
 
-.subHeading {
-  font-size: 1.2rem;
-}
+h1 {
+  color: #ef4321;
+  padding-top: 0.5rem;
+  font-size: 2rem;
+} */
 
-.buttonEspace {
-  background-color: #227ebc;
+/* button {
+  background-color: #ef4321;
+  color: white;
+  border-radius: 0.7rem;
+  padding: 0.4rem 0.7rem;
   border: none;
-  border-radius: 0.4rem;
   cursor: pointer;
-  color: #fff;
-  font-size: 0.8rem;
-  margin-right: 1rem;
-  padding: 0.5rem 0.8rem;
 }
 
-.buttonEspace:hover {
-  background-color: #025892;
-}
-
+.biographyBtn {
+  text-align: justify;
+  margin: 0rem 3rem 0rem 2rem;
+} */
 
 /* Style Experiences-card */
 .container {
@@ -48,8 +55,7 @@ span {
   gap: 100px 50px;
   padding: 100px 50px;
 }
-
-.container .card {
+.card {
   position: relative;
   display: flex;
   justify-content: center;
@@ -63,12 +69,12 @@ span {
   box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
 }
 
-.container .card:hover {
+.card:hover {
   height: 250px;
   cursor: pointer;
 }
 
-.container .card .img-box {
+.card .img-box {
   position: absolute;
   top: 20px;
   width: 300px;
@@ -79,13 +85,13 @@ span {
   transition: 0.5s;
 }
 
-.container .card:hover .img-box {
+.card:hover .img-box {
   top: -100px;
   scale: 0.75;
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
 }
 
-.container .card .img-box img {
+.card .img-box img {
   position: absolute;
   top: 0;
   left: 0;
@@ -94,7 +100,7 @@ span {
   object-fit: cover;
 }
 
-.container .card .content {
+.card .content {
   position: absolute;
   top: 252px;
   width: 100%;
@@ -105,22 +111,22 @@ span {
   transition: 0.5s;
 }
 
-.container .card:hover .content {
+.card:hover .content {
   top: 130px;
   height: 250px;
 }
 
-.container .card .content h2 {
+.card .content h2 {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--clr);
 }
 
-.container .card .content p {
+.card .content p {
   color: #333;
 }
 
-.container .card .content a {
+.card .content a {
   position: relative;
   top: 15px;
   display: inline-block;
@@ -131,27 +137,26 @@ span {
   font-weight: 500;
 }
 
-.container .card .content a:hover {
+.card .content a:hover {
   opacity: 0.8;
 }
 
 @media (max-width: 480px) {
-  .container .card {
+  .card {
     width: 230px;
     border-radius: 15px;
   }
 
-  .container .card .img-box {
+  .card .img-box {
     width: 185px;
     border-radius: 10px;
   }
 
-  .container .card .content p {
+  .card .content p {
     font-size: 0.8rem;
   }
 
-  .container .card .content a {
+  .card .content a {
     font-size: 0.9rem;
   }
-
 }

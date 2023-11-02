@@ -1,31 +1,25 @@
-body {
-background-image: url("/src/assets/Images/bg_blueWithAccessory.jpg");
-background-size: cover;  
-background-repeat: no-repeat;  
-background-position: center center; 
-}
-
-.mainContainer {
+.main {
+  background-image: url("/assets/Images/bg_blueWithAccessory.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   align-items: center;
   display: flex;
   flex-direction: column;
   padding: 3rem;
 }
 
-.welcome p {
-  color: black;
-  text-align: justify;
-  width: 65vw;
-}
-
-.welcome h1 {
+.welcome {
   color: black;
   text-align: center;
+  width: 45vw;
 }
 
 div.form-group {
   font-size: 0.9rem;
+  font-weight: 500;
   margin-bottom: 1rem;
+  width: 45vw;
 }
 
 .text-danger.small {
@@ -33,21 +27,30 @@ div.form-group {
   color: rgb(12, 92, 40);
 }
 
-.center-button {
+.champOblig {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.btn {
+  background-color: #EF4321; 
+  border: none;
   display: block;
   font-size: 0.8rem;
   margin: 0 auto;
   width: 30%;
 }
 
-.lienLogin {
-  color: white;
+.linkLogin {
+  color: black;
   font-size: 0.8rem;
+  font-weight: 450;
   margin-top: 1rem;
 }
 
 a {
   color: #ef4321;
+  font-weight: 600;
 }
 
 /* .border-danger {

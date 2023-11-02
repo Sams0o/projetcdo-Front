@@ -1,0 +1,36 @@
+.card-container {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    border-radius: 2rem;
+    margin: 1rem;
+}
+
+.card-header {
+    border-radius: 2rem 2rem 0 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.color-background {
+  background-color: rgb(10, 10, 67);
+  padding: 7rem; 
+}
+
+.card-title {
+    font-size: 1.3rem;
+}
+
+.btn {
+    background-color: #EF4321;
+    border: none;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
