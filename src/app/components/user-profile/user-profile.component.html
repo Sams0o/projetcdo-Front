@@ -10,25 +10,27 @@
     </div>
 </div>
 
+<app-card-experience [allExperiences]="userExperiences"></app-card-experience>
 
-<div class="experience-card">
-    <div class="container">
+
+<!-- <div class="experience-card">
+    <div class="container"> -->
         
         <!-- <app-card-experience *ngFor="let experience of experiences" [country]="user.experiences[0].countries[0].name"></app-card-experience> -->
-        <ng-container *ngFor="let experience of experiences">
+        <!-- <ng-container *ngFor="let experience of experiences"> -->
   <!-- Vérifie s'il y a des pays dans l'expérience -->
-  <ng-container *ngIf="experience.countries && experience.countries.length > 0">
+  <!-- <ng-container *ngIf="experience.countries && experience.countries.length > 0"> -->
     <!-- Si l'expérience a plusieurs pays, affiche "RoadTrip" -->
-    <ng-container *ngIf="experience.countries.length > 1">
+    <!-- <ng-container *ngIf="experience.countries.length > 1">
       <app-card-experience [country]="'RoadTrip'"></app-card-experience>
-    </ng-container>
+    </ng-container> -->
     <!-- Sinon, affiche le nom du premier pays de l'expérience -->
-    <ng-container *ngIf="experience.countries.length === 1">
+    <!-- <ng-container *ngIf="experience.countries.length === 1">
       <app-card-experience [country]="experience.countries[0].name"></app-card-experience>
     </ng-container>
   </ng-container>
 </ng-container>
        
     </div>
-</div>
+</div> -->
 

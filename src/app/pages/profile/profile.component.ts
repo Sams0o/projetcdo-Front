@@ -7,31 +7,28 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
-  initialUser!: Partial<User>;
-
-  // Proriété qui permet de verifier l'authentification
-  isAuthenticated: boolean = false;
+export class ProfileComponent  {
+  
 
   constructor(private userService: UserService) {}
-
-  ngOnInit() {
-    this.isAuthenticated = localStorage.getItem('token') !== null;
-    if(this.isAuthenticated) {
-       this.getDataUser();
-    }
+}
+  // ngOnInit() {
+  //   this.isAuthenticated = localStorage.getItem('token') !== null;
+  //   if(this.isAuthenticated) {
+  //      this.getDataUser();
+  //   }
    
-  }
+  
 
-  getDataUser() {
-    const initialUser = this.userService.getUserById().subscribe((data) => {
-      this.initialUser = data;
-      console.log(data);
-    });
-    console.log(initialUser);
+  // getDataUser() {
+  //   const initialUser = this.userService.getUserById().subscribe((data) => {
+  //     this.initialUser = data;
+  //     console.log(data);
+  //   });
+  //   console.log(initialUser);
 
     // return this.userService.getUserById()
-  }
 
 
-}
+
+

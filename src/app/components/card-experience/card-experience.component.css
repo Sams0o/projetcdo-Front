@@ -1,52 +1,7 @@
-/* .profile-banner {
-  background: linear-gradient(to bottom, #025591, #4093ce);
-  padding: 1.5rem 0rem 0rem 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-} */
 
-/* .circlePseudo {
-  display: flex;
- 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
-
-/* .circle {
-  width: 10rem;
-  height: 10rem;
-  background-color: white;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 9rem;
-  font-size: 5rem;
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.689);
-}
-
-h1 {
-  color: #ef4321;
-  padding-top: 0.5rem;
-  font-size: 2rem;
-} */
-
-/* button {
-  background-color: #ef4321;
-  color: white;
-  border-radius: 0.7rem;
-  padding: 0.4rem 0.7rem;
-  border: none;
-  cursor: pointer;
-}
-
-.biographyBtn {
-  text-align: justify;
-  margin: 0rem 3rem 0rem 2rem;
-} */
 
 /* Style Experiences-card */
-.container {
+/* .container {
   position: relative;
   display: flex;
   justify-content: center;
@@ -159,4 +114,40 @@ h1 {
   .card .content a {
     font-size: 0.9rem;
   }
+} */
+
+.card-container {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    border-radius: 2rem;
+    margin: 1rem;
+}
+
+.card-header {
+    border-radius: 2rem 2rem 0 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.color-background {
+  background-color: rgb(10, 10, 67);
+  padding: 7rem; 
+}
+
+.card-title {
+    font-size: 1.3rem;
+}
+
+.btn {
+    background-color: #EF4321;
+    border: none;
+    font-size: 0.9rem;
+    margin-top: 1rem;
 }
