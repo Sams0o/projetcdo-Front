@@ -1,3 +1,4 @@
+import { Category } from './category';
 import { Country } from './country';
 
 export interface Experience {
@@ -8,5 +9,5 @@ export interface Experience {
   publication_date: Date;
   travel_date: Date;
   countries: Country[];
-  categories: String;
+  categories: Category[];
 }

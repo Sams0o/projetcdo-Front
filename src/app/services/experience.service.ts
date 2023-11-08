@@ -32,7 +32,7 @@ export class ExperienceService {
 
   createExperience(experience: Experience) {
     return this.http.post<Experience>(
-      'http://localhost:3000/api/products',
+      'http://localhost:3000/api/experiences',
       experience,
       { headers: this.setHeaders() }
     );
@@ -40,7 +40,7 @@ export class ExperienceService {
 
   updateExperience(experience: Experience): Observable<Experience> {
     return this.http.patch<Experience>(
-      `http://localhost:3000/api/products/${experience.id}`,
+      `http://localhost:3000/api/experiences/${experience.id}`,
       experience,
       { headers: this.setHeaders() }
     );
@@ -48,7 +48,7 @@ export class ExperienceService {
 
   removeExperience(experience: number) {
     return this.http.delete<Experience>(
-      `http://localhost:3000/api/products/${experience}`,
+      `http://localhost:3000/api/experiences/${experience}`,
       { headers: this.setHeaders() }
     );
   }

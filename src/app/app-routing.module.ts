@@ -10,6 +10,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { ConnectionComponent } from './pages/connection/connection.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ExperienceUserComponent } from './pages/experience-user/experience-user.component';
+import { CreateExperienceComponent } from './components/create-experience/create-experience.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'connexion/register', component: RegisterComponent },
   { path: 'connexion/login', component: LoginComponent },
   { path: 'profil/user-profile', component: ProfileComponent },
+  { path: 'profil/user-profile/create', component: CreateExperienceComponent },
   { path: 'profil/user-profile/settings', component: SettingsComponent },
   { path: 'experience-user', component: ExperienceUserComponent },
   { path: '**', component: NotFoundComponent },

@@ -1,8 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Country } from 'src/app/models/country';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Experience } from 'src/app/models/experience';
-import { CountryService } from 'src/app/services/country.service';
-import { ExperienceService } from 'src/app/services/experience.service';
 
 @Component({
   selector: 'app-card-experience',
@@ -11,9 +8,20 @@ import { ExperienceService } from 'src/app/services/experience.service';
 })
 export class CardExperienceComponent {
   @Input() allExperiences: Experience[] = [];
+  @Input() enableEdit: boolean = false;
+  @Output() editRequest = new EventEmitter<Experience>();
+  @Output() deleteRequest = new EventEmitter<number>();
 
-  constructor(
+  constructor() {}
 
-  ) {}
+  editExperience(experience: Experience) {
+    this.editRequest.emit(experience);
+  }
+
+  onDelete(experienceId: number | undefined) {
+    // console.log("info:", typeof experienceId);
+    
+    this.deleteRequest.emit(experienceId);
+  }
 
 }

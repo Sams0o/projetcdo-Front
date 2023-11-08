@@ -1,14 +1,3 @@
-<!-- <div class="card" style="--clr: #009688">
-    <div class="img-box">
-        <img src="https://i.postimg.cc/t4w95jsf/img-01.png">
-    </div>
-    <div class="content">
-        <h2>{{country}}</h2>
-
-        <a [routerLink]="['/experiences/user']">Découvrir</a>
-    </div>
-</div> -->
-
 <div class="card-container">
     <div class="card" *ngFor="let experience of allExperiences" style="width: 22rem;">
         <div class="card-header">
@@ -21,6 +10,8 @@
             <h5 class="card-title">{{experience.title}}</h5>
             <a [routerLink]="['/experience-user']" [queryParams]="{ id: experience.id }"
                 class="btn btn-success">Découvrir</a>
+            <button class="btn btn-secondary" *ngIf="enableEdit" (click)="editExperience(experience)">Modifier</button>
+            <button class="btn btn-danger" *ngIf="enableEdit" (click)="onDelete(experience.id)">Supprimer</button>
         </div>
     </div>
 </div>

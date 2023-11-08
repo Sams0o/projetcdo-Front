@@ -1,0 +1,16 @@
+<div *ngIf="isOpen" class="custom-modal">
+    <div class="modal-content">
+
+        <h3>Supprimer une expérience</h3>
+
+        <div>
+            <p>Etes-vous sûr de vouloir supprimer cette expérience ?</p>
+        </div>
+
+        <div>
+            <button (click)="confirm()" class="btn btn-success" type="submit">Validez</button>
+            <button (click)="cancel()" class="btn btn-secondary">Annuler</button>
+        </div>
+
+    </div>
+</div>

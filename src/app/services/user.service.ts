@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { UserLogin } from '../models/userLogin.model';
 import { LoginResponse } from '../models/loginResponse.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -38,9 +38,17 @@ export class UserService {
 
   getUserById(): Observable<User> {
     const headers = this.setHeaders();
+    // console.log('Headers for getUserById():', headers);
+    
     return this.http.get<User>(`http://localhost:3000/api/auth`, {
       headers,
-    });
+    })
+    // .pipe(
+    //   tap((userData: User) => {
+    //     console.log('User Data from getUserById():', userData)
+        ;
+        
+  
   }
 
   logout() {
