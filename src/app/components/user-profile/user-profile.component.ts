@@ -6,6 +6,7 @@ import { ExperienceService } from 'src/app/services/experience.service';
 import { UserService } from 'src/app/services/user.service';
 import { EditExperienceComponent } from '../edit-experience/edit-experience.component';
 import { DeleteExperienceComponent } from '../delete-experience/delete-experience.component';
+import { Country } from 'src/app/models/country';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,9 +16,12 @@ import { DeleteExperienceComponent } from '../delete-experience/delete-experienc
 export class UserProfileComponent implements OnInit {
   user!: User;
   userExperiences: Experience[] = []; // Stocker les experiences de l'utilisateur
-  experienceToDelete!: number;
+  experienceSearch: Experience[] = [];
+  searchInfos!: string;
+  filteredCountries: Experience[] = [];
 
   isModalOpen: boolean = false;
+  isEditModalOpen: boolean = false;
 
   @ViewChild(EditExperienceComponent) editModal!: EditExperienceComponent;
   @ViewChild(DeleteExperienceComponent)
@@ -53,6 +57,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.logout();
   }
 
+  // Pour ouvrir la modal de modification
   openEditModal(experience: Experience) {
     console.log("Ouverture du modal avec l'experience:", experience);
 
@@ -62,7 +67,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   // Gérer la MàJ de l'expérience utilisateur
-  ExperienceUpdated(updatedExperience: Experience) {
+  experienceUpdated(updatedExperience: Experience) {
     console.log('correct + MàJ array:', updatedExperience);
 
     // trouver l'index de l'expérience qui a été MàJ
@@ -80,15 +85,34 @@ export class UserProfileComponent implements OnInit {
   openDeleteModal(experienceId: number) {
     this.confirmationModal.experienceId = experienceId;
     this.confirmationModal.open();
-    this.ExperienceDeleted(experienceId);
   }
 
   ExperienceDeleted(experienceId: number) {
     console.log('change:', typeof experienceId);
     // Supprimer l'expérience de userExperiences
-    this.experienceToDelete = experienceId;
     this.userExperiences = this.userExperiences.filter(
       (exp) => exp.id !== experienceId
     );
+
+    // Supprimer l'expérience de filteredCountries si elle y est présente
+    if (this.filteredCountries.some((exp) => exp.id === experienceId)) {
+      this.filteredCountries = this.filteredCountries.filter(
+        (exp) => exp.id !== experienceId
+      );
+    }
+  }
+
+  onSearchCountries(searchInfos: string) {
+    // console.log(JSON.stringify(searchInfos));
+    // console.log('gros zizi');
+    if (searchInfos) {
+      this.filteredCountries = this.userExperiences.filter((exp) =>
+        exp.countries.some((country) =>
+          country.name.toLowerCase().includes(searchInfos)
+        )
+      );
+    } else {
+      this.filteredCountries = [...this.userExperiences];
+    }
   }
 }

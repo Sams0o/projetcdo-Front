@@ -21,15 +21,18 @@ import { ExperienceUserComponent } from './pages/experience-user/experience-user
 import { CreateExperienceComponent } from './components/create-experience/create-experience.component';
 import { EditExperienceComponent } from './components/edit-experience/edit-experience.component';
 import { DeleteExperienceComponent } from './components/delete-experience/delete-experience.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, NavbarComponent, HomeComponent, ExperiencesComponent, LoginComponent, NotFoundComponent, UserProfileComponent, ConnectionComponent, ProfileComponent, SettingsComponent, CardExperienceComponent, ExperienceUserComponent, CreateExperienceComponent, EditExperienceComponent, DeleteExperienceComponent],
+  declarations: [AppComponent, RegisterComponent, NavbarComponent, HomeComponent, ExperiencesComponent, LoginComponent, NotFoundComponent, UserProfileComponent, ConnectionComponent, ProfileComponent, SettingsComponent, CardExperienceComponent, ExperienceUserComponent, CreateExperienceComponent, EditExperienceComponent, DeleteExperienceComponent, SearchBarComponent],
   imports: [
     BrowserModule, 
     AppRoutingModule,
     FormsModule, 
     HttpClientModule,
     ReactiveFormsModule,
+    NgSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

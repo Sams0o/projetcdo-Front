@@ -25,6 +25,8 @@ export class CreateExperienceComponent implements OnInit {
     private countryService: CountryService,
     private categoryService: CategoryService
   ) {
+  }
+  ngOnInit(): void {
     this.createForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -34,14 +36,15 @@ export class CreateExperienceComponent implements OnInit {
       countries: [[]],
       categories: [[]],
     });
-  }
-  ngOnInit(): void {
+
     this.loadCountries();
     this.loadCategories();
   }
 
   open(experience: Experience) {
+    console.log('Ouverture du modal de création d’expérience.');
     this.experience = experience;
+     console.log('Expérience actuelle:', this.experience);
 
     this.createForm.patchValue({
       title: experience.title,
@@ -55,17 +58,24 @@ export class CreateExperienceComponent implements OnInit {
         return { id: cat.id };
       }),
     });
+    console.log(
+      'Valeurs du formulaire après patchValue:',
+      this.createForm.value
+    );
     this.isOpen = true;
   }
 
   loadCountries() {
     this.countryService.getCountries().subscribe((data) => {
+      console.log("dataCountries:", data);
+      
       this.countries = data;
     });
   }
 
   loadCategories() {
     this.categoryService.getCategories().subscribe((data) => {
+      console.log('dataCategories:', data);
       this.categories = data;
     });
   }
@@ -91,11 +101,13 @@ export class CreateExperienceComponent implements OnInit {
         countries: transformedCountries,
         categories: transformedCategories,
       };
+      console.log("experiencedata",experienceData);
+      
       this.experienceService.createExperience(experienceData).subscribe({
         next: (res) => {
-          this.close();
           console.log('Experience envoyée : ', experienceData);
           alert("L'experience a été créee avec succés.");
+          this.close();
           location.reload();
         },
         error: (error) => {

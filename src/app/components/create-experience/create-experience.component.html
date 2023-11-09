@@ -20,15 +20,13 @@
             </div>
             <div class="form-group">
                 <label for="country">Pays</label>
-                <select id="country" formControlName="countries" class="form-control" multiple>
-                    <option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</option>
-                </select>
+                <ng-select [items]="countries" bindLabel="name" bindValue="id" [multiple]="true" formControlName="countries">
+                </ng-select>
             </div>
             <div class="form-group">
-                <label for="category">Catégorie</label>
-                <select id="category" formControlName="categories" class="form-control" multiple>
-                    <option *ngFor="let category of categories" [value]="category.id">{{ category.label }}</option>
-                </select>
+                <label for="category">Catégorie(s)</label>
+                <ng-select [items]="categories" bindLabel="label" bindValue="id" [multiple]="true" formControlName="categories">
+                </ng-select>
             </div>
 
             <button type="submit" class="btn btn-success" [disabled]="!createForm.valid">Soumettre</button>

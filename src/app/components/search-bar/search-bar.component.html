@@ -1,0 +1,5 @@
+<div class="search-bar d-flex" role="search">
+    <label for="search-box" class="visually-hidden">Rechercher par nom de pays</label>
+    <input class="form-control me-2" type="search" id="search-box" placeholder="Ex : Canada" aria-label="Recherchez par nom de pays" [(ngModel)]="searchInfos" (keyup)="onKeyUp()">
+    <button class="btn btn-outline-success" type="submit" (click)="onSearch()">Recherche</button>
+</div>

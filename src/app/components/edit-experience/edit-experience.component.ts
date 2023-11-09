@@ -114,7 +114,7 @@ export class EditExperienceComponent {
           location.reload();
         },
         error: (error) => {
-          console.error('Erreur lors de la mise a jour de lexpérience', error);
+          console.error('Erreur lors de la mise a jour de l\'expérience', error);
         },
       });
     }

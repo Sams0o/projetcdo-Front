@@ -1,4 +1,3 @@
-
 <div class="profile-container">
     <div class="userEspace" *ngIf="user">
         <h1>Bienvenue dans votre espace <span>{{ user.pseudo }}</span></h1>
@@ -10,8 +9,10 @@
     </div>
 </div>
 
+<app-search-bar (search)="onSearchCountries($event)"></app-search-bar>
+
 <app-card-experience  
-[allExperiences]="userExperiences" 
+[allExperiences]="filteredCountries.length > 0 ? filteredCountries : userExperiences" 
 [enableEdit]="true"
 (editRequest)="openEditModal($event)"
 (deleteRequest)="openDeleteModal($event)"
@@ -20,7 +21,8 @@
 <app-create-experience [isOpen]="isModalOpen"></app-create-experience>
 
 <app-edit-experience
-#editModal (experienceUpdated)="ExperienceUpdated($event)"
+#editModal 
+(experienceUpdated)="experienceUpdated($event)"
 ></app-edit-experience>
 
 <app-delete-experience
