@@ -17,6 +17,8 @@ export class EditExperienceComponent {
   @Output() experienceUpdated = new EventEmitter<Experience>(); // émet l'expérience MàJ
   // @Input() isOpen: boolean = false;
 
+  isDialogOpen = false;
+
   editForm: FormGroup;
   countries: Country[] = [];
   categories: Category[] = [];
@@ -59,19 +61,6 @@ export class EditExperienceComponent {
     this.loadCategories();
   }
 
-  open(experience: Experience) {
-    this.experience = experience;
-    this.editForm.patchValue({
-      title: experience.title,
-      description: experience.description,
-      city: experience.city,
-      travel_date: experience.travel_date,
-      countries: experience.countries.map((c) => c.id),
-      categories: experience.categories.map((cat) => cat.id),
-    });
-    // this.isOpen = true;
-  }
-
   loadCountries() {
     this.countryService.getCountries().subscribe((data) => {
       this.countries = data;
@@ -82,6 +71,42 @@ export class EditExperienceComponent {
     this.categoryService.getCategories().subscribe((data) => {
       this.categories = data;
     });
+  }
+
+  open(experience: Experience) {
+    console.log(
+      "open() - Ouverture de EditExperienceComponent avec l'expérience:",
+      experience
+    );
+
+    this.experience = experience;
+    this.editForm.patchValue({
+      title: experience.title,
+      description: experience.description,
+      city: experience.city,
+      travel_date: experience.travel_date,
+      countries: experience.countries.map((c) => c.id),
+      categories: experience.categories.map((cat) => cat.id),
+    });
+    this.isDialogOpen = true;
+    console.log('isdialogOpen:', this.isDialogOpen);
+
+    // this.isOpen = true;
+  }
+
+  close() {
+    // this.isDialogOpen = false;
+    console.log('close:', this.isDialogOpen);
+
+    const dialog = document.getElementById(
+      'editExperienceDialog'
+    ) as HTMLDialogElement;
+    dialog?.close();
+
+    // Réinitialiser les messages quand le dialogue est fermé
+    this.successMessage = null;
+    this.errorMessage = null;
+    // this.isOpen = false;
   }
 
   // OnSubmit appelé lors de la soumission du formulaire
@@ -122,15 +147,5 @@ export class EditExperienceComponent {
         },
       });
     }
-  }
-
-  close() {
-    const dialog = document.querySelector('dialog');
-    dialog?.close();
-
-     // Réinitialiser les messages quand le dialogue est fermé
-    this.successMessage = null;
-    this.errorMessage = null;
-    // this.isOpen = false;
   }
 }

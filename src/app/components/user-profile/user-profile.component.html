@@ -14,7 +14,7 @@
 <app-card-experience  
 [allExperiences]="filteredCountries.length > 0 ? filteredCountries : userExperiences" 
 [enableEdit]="true"
-(editRequest)="openEditModal($event)"
+(editRequest)="openEditDialog($event)"
 (deleteRequest)="openDeleteModal($event)"
 ></app-card-experience>
 

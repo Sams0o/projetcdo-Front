@@ -29,7 +29,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDataUserProfil();
-    // console.log('avant le click', this.isModalOpen);
   }
 
   // Pour afficher le modal de création d'experience
@@ -42,7 +41,6 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserById().subscribe((data) => {
       this.user = data;
       this.userExperiences = data.experiences;
-      // console.log('Données de l\'utilisateur recupérées:', this.user);
     });
   }
   // Lien qui permet à l'utilisateur de modifier ses données personnelles
@@ -56,12 +54,20 @@ export class UserProfileComponent implements OnInit {
   }
 
   // Pour ouvrir la modal de modification
-  openEditModal(experience: Experience) {
-    console.log("Ouverture du modal avec l'experience:", experience);
-
+  openEditDialog(experience: Experience) {
+    console.log(
+      " OpenEditDialogue() - Tentative d'ouverture de EditExperienceComponent avec l'experience:",
+      experience
+    );
     if (this.editModal) {
+      console.log('editModal:', this.editModal);
+
       this.editModal.open(experience);
     }
+    const dialog = document.getElementById(
+      'editExperienceDialog'
+    ) as HTMLDialogElement;
+    dialog?.showModal();
   }
 
   // Gérer la MàJ de l'expérience utilisateur

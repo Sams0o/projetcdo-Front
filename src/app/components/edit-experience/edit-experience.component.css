@@ -22,6 +22,18 @@
   overflow: auto;
 } */
 
+dialog {
+  border: 2px solid red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%; /* ou une largeur fixe pour le test */
+  height: auto;
+  z-index: 1000;
+  background-color: white; /* pour s'assurer qu'il se démarque */
+}
+
 .btn-success {
   margin-right: 1rem;
 }
