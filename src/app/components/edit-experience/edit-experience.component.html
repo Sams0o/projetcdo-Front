@@ -1,6 +1,16 @@
-<div *ngIf="isOpen" class="modal-background" (click)="close()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
+<dialog class="dialog-background" (click)="close()">
+    <div class="dialog-content" (click)="$event.stopPropagation()">
         <h2>Modifier une expérience</h2>
+
+        <!-- Notification pour les messages de succès ou d'erreur -->
+        <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
+
+        <!-- Forumlaire pour la modification d'une expérience -->
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label>Titre</label>
@@ -33,4 +43,4 @@
             <button (click)="close()" class="btn btn-secondary">Annuler</button>
         </form>
     </div>
-</div>
+</dialog>

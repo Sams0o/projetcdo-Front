@@ -17,15 +17,13 @@ export class CreateExperienceComponent implements OnInit {
   createForm!: FormGroup;
   countries: Country[] = [];
   categories: Category[] = [];
-  @Input() isOpen: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private experienceService: ExperienceService,
     private countryService: CountryService,
     private categoryService: CategoryService
-  ) {
-  }
+  ) {}
   ngOnInit(): void {
     this.createForm = this.fb.group({
       title: ['', Validators.required],
@@ -44,7 +42,7 @@ export class CreateExperienceComponent implements OnInit {
   open(experience: Experience) {
     console.log('Ouverture du modal de création d’expérience.');
     this.experience = experience;
-     console.log('Expérience actuelle:', this.experience);
+    console.log('Expérience actuelle:', this.experience);
 
     this.createForm.patchValue({
       title: experience.title,
@@ -62,20 +60,16 @@ export class CreateExperienceComponent implements OnInit {
       'Valeurs du formulaire après patchValue:',
       this.createForm.value
     );
-    this.isOpen = true;
   }
 
   loadCountries() {
     this.countryService.getCountries().subscribe((data) => {
-      console.log("dataCountries:", data);
-      
       this.countries = data;
     });
   }
 
   loadCategories() {
     this.categoryService.getCategories().subscribe((data) => {
-      console.log('dataCategories:', data);
       this.categories = data;
     });
   }
@@ -101,8 +95,8 @@ export class CreateExperienceComponent implements OnInit {
         countries: transformedCountries,
         categories: transformedCategories,
       };
-      console.log("experiencedata",experienceData);
-      
+      console.log('experiencedata', experienceData);
+
       this.experienceService.createExperience(experienceData).subscribe({
         next: (res) => {
           console.log('Experience envoyée : ', experienceData);
@@ -113,13 +107,15 @@ export class CreateExperienceComponent implements OnInit {
         error: (error) => {
           console.error(
             "Une erreur est survenue lors de la création de l'expérience",
-            error);
+            error
+          );
         },
       });
     }
   }
 
   close() {
-    this.isOpen = false;
+    const dialog = document.querySelector('dialog');
+    dialog?.close();
   }
 }

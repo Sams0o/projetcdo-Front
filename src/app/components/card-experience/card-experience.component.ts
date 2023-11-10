@@ -19,8 +19,6 @@ export class CardExperienceComponent {
   }
 
   onDelete(experienceId: number | undefined) {
-    // console.log("info:", typeof experienceId);
-    
     this.deleteRequest.emit(experienceId);
   }
 

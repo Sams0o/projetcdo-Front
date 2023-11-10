@@ -15,17 +15,20 @@ import { ExperienceService } from 'src/app/services/experience.service';
 export class EditExperienceComponent {
   @Input() experience?: Experience; // accepte une expérience à modier
   @Output() experienceUpdated = new EventEmitter<Experience>(); // émet l'expérience MàJ
-  @Input() isOpen: boolean = false;
+  // @Input() isOpen: boolean = false;
 
   editForm: FormGroup;
   countries: Country[] = [];
   categories: Category[] = [];
 
+  successMessage: string | null = null; // Pour les messages de succès
+  errorMessage: string | null = null; // Pour les messages d'erreur
+
   constructor(
     private fb: FormBuilder,
     private experienceService: ExperienceService, // pour gérer les requetes liées aux expériences
     private countryService: CountryService,
-    private categoryService: CategoryService,
+    private categoryService: CategoryService
   ) {
     this.editForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(30)]],
@@ -66,7 +69,7 @@ export class EditExperienceComponent {
       countries: experience.countries.map((c) => c.id),
       categories: experience.categories.map((cat) => cat.id),
     });
-    this.isOpen = true;
+    // this.isOpen = true;
   }
 
   loadCountries() {
@@ -109,18 +112,25 @@ export class EditExperienceComponent {
       this.experienceService.updateExperience(updatedExperience).subscribe({
         next: (experience) => {
           this.experienceUpdated.emit(experience);
-          alert("L'expérience a été mise à jour avec succès.");
-          this.close()
-          location.reload();
+          this.successMessage = "L'expérience a été mise à jour avec succès.";
+          setTimeout(() => (this.successMessage = null), 3000);
+          this.close();
         },
         error: (error) => {
-          console.error('Erreur lors de la mise a jour de l\'expérience', error);
+          this.errorMessage = "Erreur lors de la mise à jour de l'expérience";
+          setTimeout(() => (this.errorMessage = null), 3000);
         },
       });
     }
   }
 
   close() {
-    this.isOpen = false;
+    const dialog = document.querySelector('dialog');
+    dialog?.close();
+
+     // Réinitialiser les messages quand le dialogue est fermé
+    this.successMessage = null;
+    this.errorMessage = null;
+    // this.isOpen = false;
   }
 }

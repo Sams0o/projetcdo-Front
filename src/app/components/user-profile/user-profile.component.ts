@@ -2,11 +2,9 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Experience } from 'src/app/models/experience';
 import { User } from 'src/app/models/user.model';
-import { ExperienceService } from 'src/app/services/experience.service';
 import { UserService } from 'src/app/services/user.service';
 import { EditExperienceComponent } from '../edit-experience/edit-experience.component';
 import { DeleteExperienceComponent } from '../delete-experience/delete-experience.component';
-import { Country } from 'src/app/models/country';
 
 @Component({
   selector: 'app-user-profile',
@@ -35,9 +33,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   // Pour afficher le modal de création d'experience
-  openModal() {
-    this.isModalOpen = true;
-    console.log('apres le click', this.isModalOpen);
+  openCreateDialog() {
+    const dialog = document.querySelector('dialog');
+    dialog?.showModal();
   }
 
   getDataUserProfil() {
@@ -103,8 +101,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSearchCountries(searchInfos: string) {
-    // console.log(JSON.stringify(searchInfos));
-    // console.log('gros zizi');
     if (searchInfos) {
       this.filteredCountries = this.userExperiences.filter((exp) =>
         exp.countries.some((country) =>

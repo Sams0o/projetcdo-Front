@@ -1,5 +1,5 @@
-<div *ngIf="isOpen" class="modal-background" (click)="close()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
+<dialog class="dialog-background" (click)="close()">
+    <div class="dialog-content" (click)="$event.stopPropagation()">
         <h2>Créer une experience</h2>
         <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
@@ -33,4 +33,4 @@
             <button (click)="close()" class="btn btn-secondary">Annuler</button>
         </form>
     </div>
-</div>
+</dialog>

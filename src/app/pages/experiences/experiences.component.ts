@@ -12,12 +12,15 @@ import { ExperienceService } from 'src/app/services/experience.service';
 export class ExperiencesComponent implements OnInit {
   allExperiences!: Experience[];
   allCountries!: Country[];
-  experienceToDisplay!: Experience[];
+  experienceToDisplay: Experience[] = [];
   countryToDisplay!: Country[];
+
+  filteredCountries: Experience[] = [];
+  searchInfos!: string;
 
   constructor(
     private experienceService: ExperienceService,
-    private countryService: CountryService,
+    private countryService: CountryService
   ) {}
 
   ngOnInit() {
@@ -40,5 +43,17 @@ export class ExperiencesComponent implements OnInit {
         console.error(error);
       },
     });
+  }
+
+  onSearchCountries(searchInfos: string) {
+    if (searchInfos) {
+      this.filteredCountries = this.experienceToDisplay.filter((exp) =>
+        exp.countries.some((country) =>
+          country.name.toLowerCase().includes(searchInfos)
+        )
+      );
+    } else {
+      this.filteredCountries = [...this.experienceToDisplay];
+    }
   }
 }
