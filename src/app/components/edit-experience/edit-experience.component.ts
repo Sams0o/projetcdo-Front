@@ -6,6 +6,7 @@ import { Experience } from 'src/app/models/experience';
 import { CategoryService } from 'src/app/services/category.service';
 import { CountryService } from 'src/app/services/country.service';
 import { ExperienceService } from 'src/app/services/experience.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-edit-experience',
@@ -30,7 +31,8 @@ export class EditExperienceComponent {
     private fb: FormBuilder,
     private experienceService: ExperienceService, // pour gérer les requetes liées aux expériences
     private countryService: CountryService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private userService: UserService
   ) {
     this.editForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(30)]],
@@ -138,8 +140,14 @@ export class EditExperienceComponent {
         next: (experience) => {
           this.experienceUpdated.emit(experience);
           this.successMessage = "L'expérience a été mise à jour avec succès.";
-          setTimeout(() => (this.successMessage = null), 3000);
+          setTimeout(() => {
+            this.successMessage = null; 
+          }, 3000);
           this.close();
+
+          const id = updatedExperience.id;
+          
+          this.experience = experience;
         },
         error: (error) => {
           this.errorMessage = "Erreur lors de la mise à jour de l'expérience";

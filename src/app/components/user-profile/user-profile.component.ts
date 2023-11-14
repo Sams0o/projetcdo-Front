@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Experience } from 'src/app/models/experience';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { EditExperienceComponent } from '../edit-experience/edit-experience.component';
 import { DeleteExperienceComponent } from '../delete-experience/delete-experience.component';
+import { ExperienceService } from 'src/app/services/experience.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -25,10 +26,15 @@ export class UserProfileComponent implements OnInit {
   @ViewChild(DeleteExperienceComponent)
   confirmationModal!: DeleteExperienceComponent;
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private experienceService: ExperienceService
+  ) {}
 
   ngOnInit(): void {
     this.getDataUserProfil();
+    this.experienceService.updateExperiences(this.userExperiences);
   }
 
   // Pour afficher le modal de création d'experience
@@ -42,6 +48,7 @@ export class UserProfileComponent implements OnInit {
       this.user = data;
       this.userExperiences = data.experiences;
     });
+    return this.userExperiences;
   }
   // Lien qui permet à l'utilisateur de modifier ses données personnelles
   settings() {
@@ -83,7 +90,12 @@ export class UserProfileComponent implements OnInit {
     if (indexToUpdate !== -1) {
       this.userExperiences[indexToUpdate] = updatedExperience;
       this.userExperiences = [...this.userExperiences];
+      this.userExperiences = this.getDataUserProfil();
+      // this.experienceService.updateExperiences(this.userExperiences);
     }
+    // location.reload();
+    this.userExperiences = this.getDataUserProfil();
+    this.experienceService.updateExperiences(this.userExperiences);
   }
 
   openDeleteModal(experienceId: number) {
@@ -107,6 +119,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSearchCountries(searchInfos: string) {
+    
     if (searchInfos) {
       this.filteredCountries = this.userExperiences.filter((exp) =>
         exp.countries.some((country) =>

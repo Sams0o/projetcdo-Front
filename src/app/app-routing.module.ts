@@ -5,7 +5,6 @@ import { ExperiencesComponent } from './pages/experiences/experiences.component'
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-// import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ConnectionComponent } from './pages/connection/connection.component';
 import { ProfileComponent } from './pages/profile/profile.component';

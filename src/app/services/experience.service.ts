@@ -1,14 +1,20 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Experience } from '../models/experience';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExperienceService {
+  private experiencesSource = new BehaviorSubject<Experience[]>([]);
+  public experiences = this.experiencesSource.asObservable();
+
   constructor(private http: HttpClient) {}
 
+  updateExperiences(experiences: Experience[]) {
+    this.experiencesSource.next(experiences);
+  }
   setHeaders() {
     const jwtToken = localStorage.getItem('token');
     const headers = new HttpHeaders({
