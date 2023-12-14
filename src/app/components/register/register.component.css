@@ -15,6 +15,22 @@
   width: 45vw;
 }
 
+.name-fields-container {
+  display: flex;
+  justify-content: space-between;
+  width: 45vw; /* Assurez-vous que cela correspond à la largeur des autres form-group */
+}
+
+.form-field {
+  flex: 1;
+  margin: 0;
+  margin-right: 1rem; 
+}
+
+.name-fields-container > .form-field:last-child {
+  margin-right: 0;
+}
+
 div.form-group {
   font-size: 0.9rem;
   font-weight: 500;
@@ -35,10 +51,6 @@ div.form-group {
 .btn {
   background-color: #EF4321; 
   border: none;
-  display: block;
-  font-size: 0.8rem;
-  margin: 0 auto;
-  width: 30%;
 }
 
 .linkLogin {
@@ -53,7 +65,13 @@ a {
   font-weight: 600;
 }
 
-/* .border-danger {
-  border-color: rgb(39, 25, 197);
-  box-shadow: 0 0 4px 1px rgba(24, 24, 222, 0.689);
-} */
+/* Media query pour les petits écrans */
+@media (max-width: 480px) {
+  .welcome, div.form-group, .name-fields-container {
+    width: 80vw; 
+  }
+
+  .form-field {
+    margin-right: 0.5rem; 
+  }
+}

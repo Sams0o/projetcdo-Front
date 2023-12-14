@@ -2,14 +2,6 @@
     <div class="dialog-content" (click)="$event.stopPropagation()">
         <h2>Modifier une expérience</h2>
 
-        <!-- Notification pour les messages de succès ou d'erreur -->
-        <div *ngIf="successMessage" class="alert alert-success">
-            {{ successMessage }}
-        </div>
-        <div *ngIf="errorMessage" class="alert alert-danger">
-            {{ errorMessage }}
-        </div>
-
         <!-- Forumlaire pour la modification d'une expérience -->
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
@@ -39,8 +31,18 @@
                 </ng-select>
             </div>
 
-            <button type="submit" class="btn btn-success" [disabled]="!editForm.valid">Mettre à jour</button>
-            <button (click)="close()" class="btn btn-secondary">Annuler</button>
+            <div class="button-container">
+                <button type="submit" class="btn btn-success" [disabled]="!editForm.valid">Modifier</button>
+                <button (click)="close()" class="btn btn-secondary">Annuler</button>
+            </div>
         </form>
+
+        <!-- Notification pour les messages de succès ou d'erreur -->
+        <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
     </div>
 </dialog>

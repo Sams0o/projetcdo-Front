@@ -7,6 +7,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CountryService } from 'src/app/services/country.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-experience',
@@ -16,7 +17,6 @@ import { UserService } from 'src/app/services/user.service';
 export class EditExperienceComponent {
   @Input() experience?: Experience; // accepte une expérience à modier
   @Output() experienceUpdated = new EventEmitter<Experience>(); // émet l'expérience MàJ
-  // @Input() isOpen: boolean = false;
 
   isDialogOpen = false;
 
@@ -32,7 +32,7 @@ export class EditExperienceComponent {
     private experienceService: ExperienceService, // pour gérer les requetes liées aux expériences
     private countryService: CountryService,
     private categoryService: CategoryService,
-    private userService: UserService
+    private toast: ToastrService
   ) {
     this.editForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(30)]],
@@ -76,10 +76,6 @@ export class EditExperienceComponent {
   }
 
   open(experience: Experience) {
-    console.log(
-      "open() - Ouverture de EditExperienceComponent avec l'expérience:",
-      experience
-    );
 
     this.experience = experience;
     this.editForm.patchValue({
@@ -91,15 +87,9 @@ export class EditExperienceComponent {
       categories: experience.categories.map((cat) => cat.id),
     });
     this.isDialogOpen = true;
-    console.log('isdialogOpen:', this.isDialogOpen);
-
-    // this.isOpen = true;
   }
 
-  close() {
-    // this.isDialogOpen = false;
-    console.log('close:', this.isDialogOpen);
-
+  close() {;
     const dialog = document.getElementById(
       'editExperienceDialog'
     ) as HTMLDialogElement;
@@ -108,12 +98,11 @@ export class EditExperienceComponent {
     // Réinitialiser les messages quand le dialogue est fermé
     this.successMessage = null;
     this.errorMessage = null;
-    // this.isOpen = false;
   }
 
   // OnSubmit appelé lors de la soumission du formulaire
   onSubmit() {
-    console.log('Vérification données extraites :', this.editForm.value);
+    
 
     // Vérifie si le formulaire est valide + si une expérience a été passée en input
     if (this.editForm.valid && this.experience) {
@@ -139,6 +128,10 @@ export class EditExperienceComponent {
       this.experienceService.updateExperience(updatedExperience).subscribe({
         next: (experience) => {
           this.experienceUpdated.emit(experience);
+          this.toast.success(
+            "L'expérience a été mise à jour avec succès.",
+            'Modifier une expérience'
+          );
           this.successMessage = "L'expérience a été mise à jour avec succès.";
           setTimeout(() => {
             this.successMessage = null; 
@@ -150,6 +143,10 @@ export class EditExperienceComponent {
           this.experience = experience;
         },
         error: (error) => {
+          this.toast.error(
+            "Un problème est survenu lors de la modification de l'expérience",
+            'Erreur'
+          );
           this.errorMessage = "Erreur lors de la mise à jour de l'expérience";
           setTimeout(() => (this.errorMessage = null), 3000);
         },

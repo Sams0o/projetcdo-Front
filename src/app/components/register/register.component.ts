@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 
@@ -15,6 +16,7 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
+    private toast: ToastrService,
   ) {
     this.registerForm = this.fb.group({
       first_name: ['', Validators.required],
@@ -45,17 +47,23 @@ export class RegisterComponent {
     this.passwordMismatch = password !== confirmPassword;
 
     if (this.registerForm.valid && !this.passwordMismatch) {
-    // Si tous les champs sont valides, alors continuez avec l'inscription
+      // Si tous les champs sont valides, alors continuez avec l'inscription
       const user = this.registerForm.value;
-      console.log('onSubmit', user);
+
       this.userService.registerUser(user).subscribe({
         next: (res) => {
-          console.log("Inscription réussie:", res);
+          this.toast.success(
+            "Inscription réussie !",
+            'Inscription'
+          );
           this.router.navigate(['/connexion/login']);
         },
         error: (error) => {
-          console.log("Erreur lors de l'inscription :", error);
-        }
+          this.toast.error(
+            "Un problème est survenu lors de l'inscription'",
+            'Erreur'
+          );
+        },
       });
     }
   }

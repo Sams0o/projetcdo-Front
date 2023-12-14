@@ -9,9 +9,10 @@
         <div class="card-body text-center">
             <h5 class="card-title">{{experience.title}}</h5>
             <a [routerLink]="['/experience-user']" [queryParams]="{ id: experience.id }"
-                class="btn btn-success">Découvrir</a>
-            <button class="btn btn-secondary" *ngIf="enableEdit" (click)="editExperience(experience)">Modifier</button>
-            <button class="btn btn-danger" *ngIf="enableEdit" (click)="onDelete(experience.id)">Supprimer</button>
+                class="btn btn-outline-success">Découvrir</a>
+            <button class="btn btn-outline-warning" *ngIf="enableEdit" (click)="editExperience(experience)">Modifier</button>
+            <button class="btn btn-outline-danger" *ngIf="enableEdit" (click)="onDelete(experience.id)">Supprimer</button>
+            <!-- <img src="/assets/Images/https.png" alt="" class="btn btn-secondary" *ngIf="enableEdit" (click)="onDelete(experience.id)"> -->
         </div>
     </div>
 </div>

@@ -8,7 +8,7 @@
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <input type="textarea" formControlName="description" class="form-control" />
+                <textarea formControlName="description" class="form-control"></textarea>
             </div>
             <div class="form-group">
                 <label>Ville(s)</label>
@@ -25,12 +25,15 @@
             </div>
             <div class="form-group">
                 <label for="category">Catégorie(s)</label>
-                <ng-select [items]="categories" bindLabel="label" bindValue="id" [multiple]="true" formControlName="categories">
+                <ng-select [items]="categories" bindLabel="label" bindValue="id" [multiple]="true" 
+                formControlName="categories">
                 </ng-select>
             </div>
 
-            <button type="submit" class="btn btn-success" [disabled]="!createForm.valid">Soumettre</button>
-            <button (click)="close()" class="btn btn-secondary">Annuler</button>
+            <div class="button-container">
+                <button type="submit" class="btn btn-success" [disabled]="!createForm.valid">Valider</button>
+                <button (click)="close()" class="btn btn-secondary">Annuler</button>
+            </div>
         </form>
     </div>
 </dialog>

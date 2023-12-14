@@ -23,18 +23,42 @@ import { EditExperienceComponent } from './components/edit-experience/edit-exper
 import { DeleteExperienceComponent } from './components/delete-experience/delete-experience.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UrlService } from './services/url.service';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, NavbarComponent, HomeComponent, ExperiencesComponent, LoginComponent, NotFoundComponent, UserProfileComponent, ConnectionComponent, ProfileComponent, SettingsComponent, CardExperienceComponent, ExperienceUserComponent, CreateExperienceComponent, EditExperienceComponent, DeleteExperienceComponent, SearchBarComponent],
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    NavbarComponent,
+    HomeComponent,
+    ExperiencesComponent,
+    LoginComponent,
+    NotFoundComponent,
+    UserProfileComponent,
+    ConnectionComponent,
+    ProfileComponent,
+    SettingsComponent,
+    CardExperienceComponent,
+    ExperienceUserComponent,
+    CreateExperienceComponent,
+    EditExperienceComponent,
+    DeleteExperienceComponent,
+    SearchBarComponent,
+  ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     AppRoutingModule,
-    FormsModule, 
+    FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
     NgSelectModule,
+    // import de ngx-toastr et le forRoot sert a etre utiliser dans toutes les routes de l'applie
+    ToastrModule.forRoot({ preventDuplicates: true }),
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [UrlService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

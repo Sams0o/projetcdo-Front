@@ -1,3 +1,5 @@
+@import "node_modules/ngx-toastr/toastr.css";
+
 *,
 *::after,
 *::before {
@@ -10,3 +12,4 @@
 .navbar-toggler {
   border: none;
 }
+

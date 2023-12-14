@@ -62,12 +62,8 @@ export class UserProfileComponent implements OnInit {
 
   // Pour ouvrir la modal de modification
   openEditDialog(experience: Experience) {
-    console.log(
-      " OpenEditDialogue() - Tentative d'ouverture de EditExperienceComponent avec l'experience:",
-      experience
-    );
+ 
     if (this.editModal) {
-      console.log('editModal:', this.editModal);
 
       this.editModal.open(experience);
     }
@@ -79,7 +75,6 @@ export class UserProfileComponent implements OnInit {
 
   // Gérer la MàJ de l'expérience utilisateur
   experienceUpdated(updatedExperience: Experience) {
-    console.log('correct + MàJ array:', updatedExperience);
 
     // trouver l'index de l'expérience qui a été MàJ
     const indexToUpdate = this.userExperiences.findIndex(
@@ -93,7 +88,6 @@ export class UserProfileComponent implements OnInit {
       this.userExperiences = this.getDataUserProfil();
       // this.experienceService.updateExperiences(this.userExperiences);
     }
-    // location.reload();
     this.userExperiences = this.getDataUserProfil();
     this.experienceService.updateExperiences(this.userExperiences);
   }
@@ -104,7 +98,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   ExperienceDeleted(experienceId: number) {
-    console.log('change:', typeof experienceId);
     // Supprimer l'expérience de userExperiences
     this.userExperiences = this.userExperiences.filter(
       (exp) => exp.id !== experienceId
@@ -121,11 +114,17 @@ export class UserProfileComponent implements OnInit {
   onSearchCountries(searchInfos: string) {
     
     if (searchInfos) {
-      this.filteredCountries = this.userExperiences.filter((exp) =>
-        exp.countries.some((country) =>
-          country.name.toLowerCase().includes(searchInfos)
-        )
-      );
+       this.filteredCountries = this.userExperiences.filter((exp) => {
+         // Vérifier si "roadtrip" commence par la chaîne recherchée
+         const isRoadtripSearch = 'roadtrip'.startsWith(searchInfos.toLowerCase());
+
+         // Filtre pour "Roadtrip" ou pays spécifique
+         return isRoadtripSearch && exp.countries.length > 1
+           ? true
+           : exp.countries.some((country) =>
+               country.name.toLowerCase().includes(searchInfos.toLowerCase())
+             );
+       });
     } else {
       this.filteredCountries = [...this.userExperiences];
     }

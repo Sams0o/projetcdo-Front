@@ -3,13 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { UserLogin } from '../models/userLogin.model';
 import { LoginResponse } from '../models/loginResponse.model';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  private loggedIn = new BehaviorSubject<boolean>(false);
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -30,29 +32,29 @@ export class UserService {
 
   loginUser(data: UserLogin): Observable<LoginResponse> {
     console.log('loginUser', data);
-    return this.http.post<LoginResponse>(
-      `http://localhost:3000/api/auth/login`,
-      data
+    return this.http.post<LoginResponse>(`http://localhost:3000/api/auth/login`, data).pipe(
+      tap((res) => {
+        this.loggedIn.next(true);
+        localStorage.setItem('token', res.accessToken);
+      })
     );
   }
 
   getUserById(): Observable<User> {
     const headers = this.setHeaders();
-    // console.log('Headers for getUserById():', headers);
     
     return this.http.get<User>(`http://localhost:3000/api/auth`, {
       headers,
-    })
-    // .pipe(
-    //   tap((userData: User) => {
-    //     console.log('User Data from getUserById():', userData)
-        ;
-        
-  
+    });      
+  }
+
+  isLoggedIn() {
+    return this.loggedIn.asObservable();
   }
 
   logout() {
     localStorage.removeItem('token');
+    this.loggedIn.next(false);
     this.router.navigate(['/connexion/login'])
   }
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';    
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent  {
   isButtonClicked = false;
-  isConnected: boolean = false;
 
   constructor(
+    public userService: UserService
   ) {}
 
   toggleIcon() {

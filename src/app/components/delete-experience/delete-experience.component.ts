@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Experience } from 'src/app/models/experience';
 import { ExperienceService } from 'src/app/services/experience.service';
 
@@ -15,7 +15,7 @@ export class DeleteExperienceComponent {
 
   constructor(
     private experienceService: ExperienceService,
-    private route: ActivatedRoute
+    private toast: ToastrService,
   ) {}
 
   @Output() confirmEvent = new EventEmitter<number>();
@@ -26,14 +26,15 @@ export class DeleteExperienceComponent {
   deleteExperience(id: number) {
     this.experienceService.removeExperience(id).subscribe({
       next: (res) => {
-        alert("L'expérience a été supprimée avec succès.");
+        this.toast.success("L'expérience a été supprimée avec succès.", 'Suppression');
         this.confirmEvent.emit(id);
         this.close();
       },
       error: (error) => {
         console.error(error);
-        alert(
-          "Une erreur s'est produite lors de la suppression de l'expérience."
+        this.toast.error(
+          "Une erreur s'est produite lors de la suppression de l'expérience.",
+          'Erreur'
         );
       },
     });
