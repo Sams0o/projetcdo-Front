@@ -1,39 +1,44 @@
-/* CSS pour le fond de la modal */
-/* .modal-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000; 
-} */
-
-/* CSS pour le contenu de la modal */
-/* .modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  max-width: 80%;
-  overflow: auto;
-} */
-
 dialog {
-  border: 2px solid red;
+  border: none;
+  border-radius: 1rem;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%; /* ou une largeur fixe pour le test */
-  height: auto;
-  z-index: 1000;
-  background-color: white; /* pour s'assurer qu'il se démarque */
+  width: 50%;
+  height: 80%;
+  background-color: rgb(255, 255, 255); 
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.dialog-content {
+  padding: 1rem;
+}
+
+h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 0.7rem;
+}
+
+ng-select {
+  margin-bottom: 1rem;
 }
 
 .btn-success {
   margin-right: 1rem;
+}
+
+/* Medias queries */
+@media only screen and (max-width: 380px) {
+  dialog {
+    height: 85%;
+    width: 90%;
+  }
 }

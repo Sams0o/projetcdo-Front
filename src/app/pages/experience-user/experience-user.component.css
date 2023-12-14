@@ -1,7 +1,39 @@
+.main {
+  background-color: #F6F1EB;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  min-height: 100vh;
+}
+
 .experience-details {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 5rem;
+    padding: 0 10rem;
+    margin-bottom: 0;
+}
+
+.description {
+    margin-top: 1rem;
+    text-align: justify;
+}
+
+.btn {
+    background-color: #EF4321;
+    border: none;
     margin-top: 2rem;
+    margin-bottom: 5rem;
+}
+
+/* Media query pour les petits écrans */
+@media (max-width: 480px) {
+    .experience-details {
+        margin: 0 1rem;
+        padding: 0.1rem;
+        text-align: center;
+    }
 }

@@ -25,7 +25,6 @@ export class SearchBarComponent {
   // Envoi de la valeur actuelle lors du clic sur le bouton
   onSearch() {
     this.search.emit(this.searchInfos);
-    console.log('country rechercher ', this.searchInfos);
   }
 
   // Appelée à chaque fois qu'une touche est relâchée dans la searchBar

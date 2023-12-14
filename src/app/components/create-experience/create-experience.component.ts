@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Category } from 'src/app/models/category';
 import { Country } from 'src/app/models/country';
 import { Experience } from 'src/app/models/experience';
@@ -22,7 +23,9 @@ export class CreateExperienceComponent implements OnInit {
     private fb: FormBuilder,
     private experienceService: ExperienceService,
     private countryService: CountryService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private toast: ToastrService,
+
   ) {}
   ngOnInit(): void {
     this.createForm = this.fb.group({
@@ -40,9 +43,7 @@ export class CreateExperienceComponent implements OnInit {
   }
 
   open(experience: Experience) {
-    console.log('Ouverture du modal de création d’expérience.');
     this.experience = experience;
-    console.log('Expérience actuelle:', this.experience);
 
     this.createForm.patchValue({
       title: experience.title,
@@ -56,10 +57,6 @@ export class CreateExperienceComponent implements OnInit {
         return { id: cat.id };
       }),
     });
-    console.log(
-      'Valeurs du formulaire après patchValue:',
-      this.createForm.value
-    );
   }
 
   loadCountries() {
@@ -79,12 +76,8 @@ export class CreateExperienceComponent implements OnInit {
     if (this.createForm.valid) {
       const formValue = this.createForm.value;
 
-      const transformedCountries = formValue.countries.map((id: number) => ({
-        id,
-      }));
-      const transformedCategories = formValue.categories.map((id: number) => ({
-        id,
-      }));
+      const transformedCountries = formValue.countries.map((id: number) => ({id,}));
+      const transformedCategories = formValue.categories.map((id: number) => ({id,}));
 
       const experienceData = {
         ...this.experience,
@@ -95,20 +88,15 @@ export class CreateExperienceComponent implements OnInit {
         countries: transformedCountries,
         categories: transformedCategories,
       };
-      console.log('experiencedata', experienceData);
 
       this.experienceService.createExperience(experienceData).subscribe({
         next: (res) => {
-          console.log('Experience envoyée : ', experienceData);
-          alert("L'experience a été créee avec succés.");
+          this.toast.success('L\'expérience a été créée avec succès', 'Créer une expérience');
           this.close();
-          location.reload();
+           setTimeout(() => {location.reload();}, 3000);
         },
         error: (error) => {
-          console.error(
-            "Une erreur est survenue lors de la création de l'expérience",
-            error
-          );
+          this.toast.error('Un problème est survenu lors de la création de l\'expérience', 'Erreur');
         },
       });
     }

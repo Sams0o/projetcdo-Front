@@ -16,7 +16,9 @@
                     <a class="nav-link" [routerLink]="['/experiences']">Experiences</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"  [routerLink]="['/connexion']">Connexion</a>
+                    <a class="nav-link" *ngIf="(userService.isLoggedIn() | async); else loginLink"
+                        (click)="userService.logout()">Déconnexion</a>
+                    <ng-template #loginLink><a class="nav-link"  [routerLink]="['/connexion']">Connexion</a></ng-template>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/profil/user-profile']">Profil</a>

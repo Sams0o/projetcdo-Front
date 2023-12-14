@@ -1,7 +1,10 @@
+
+<img src="/assets/Images/banniere2.jpg" alt="">
+
 <app-search-bar (search)="onSearchCountries($event)"></app-search-bar>
 
 <div class="card-container">
-<div class="card" *ngFor="let experience of allExperiences" style="width: 22rem;">
+<div class="card" *ngFor="let experience of filteredCountries" style="width: 22rem;">
     <div class="card-header">
         {{experience.countries.length > 0 ? (experience.countries.length > 1 ? 'Roadtrip' : experience.countries[0].name) : 'Pays inconnu'}}
     </div>
@@ -9,7 +12,8 @@
     </div>
     <div class="card-body text-center">
         <h5 class="card-title">{{experience.title}}</h5>
-        <a [routerLink]="['/experience-user']" [queryParams]="{ id: experience.id }" class="btn btn-success">Découvrir</a>
+        <!-- <a class="btn btn-success" (click)="navigateOtherPage(experience.id);onUserClick()">Découvrir</a> -->
+        <a [routerLink]="['/experience-user']" [queryParams]="{ id: experience.id }" class="btn btn-success" (click)="onUserClick()">Découvrir</a>
     </div>
 </div>
 </div>
