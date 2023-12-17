@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Country } from 'src/app/models/country';
 import { Experience } from 'src/app/models/experience';
 import { CountryService } from 'src/app/services/country.service';
 import { ExperienceService } from 'src/app/services/experience.service';
-import { UrlService } from 'src/app/services/url.service';
+import { UserService } from 'src/app/services/user.service';
+import { DeleteExperienceComponent } from 'src/app/components/delete-experience/delete-experience.component';
 
 @Component({
   selector: 'app-experiences',
@@ -19,20 +20,28 @@ export class ExperiencesComponent implements OnInit {
   filteredCountries: Experience[] = [];
   searchInfos!: string;
 
+  admin: boolean = false;
+  userId: number | null = null;
+
+  experienceToDeleteId!: number;
+  @ViewChild('deleteModal') deleteModal!: DeleteExperienceComponent;
+
   clickCount = 0;
 
   constructor(
     private experienceService: ExperienceService,
     private countryService: CountryService,
-    private router: Router
+    private userService: UserService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
     this.experienceService.getExperiences().subscribe({
       next: (res) => {
-        console.log('Expériences chargées :', res);
         this.allExperiences = [...res];
-        this.filteredCountries = [...this.allExperiences];
+        this.filteredCountries = this.allExperiences.filter(
+          (exp) => exp.id !== undefined
+        );
       },
       error: (error) => {
         console.error(error);
@@ -41,7 +50,6 @@ export class ExperiencesComponent implements OnInit {
 
     this.countryService.getCountries().subscribe({
       next: (res) => {
-        console.log('Pays chargés :', res);
         this.allCountries = [...res];
         this.countryToDisplay = [...res];
       },
@@ -49,10 +57,64 @@ export class ExperiencesComponent implements OnInit {
         console.error(error);
       },
     });
+
+    this.extractUserId();
+    if (this.userId) {
+      this.userService.getUserById().subscribe({
+        next: (userDetails) => {
+          this.admin = userDetails.admin ?? false;
+        },
+        error: (err) => {
+          console.error(
+            "Erreur lors de la récupération des détails de l'utilisateur",
+            err
+          );
+        },
+      });
+    }
   }
 
+  extractUserId() {
+    const token: string | null = localStorage.getItem('token');
+
+    if (token) {
+      try {
+        const base64Url = token.split('.')[1]; // Récupère la charge utile du token
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Remplace les caractères pour Base64 standard
+        const jsonPayload = decodeURIComponent(
+          window
+            .atob(base64)
+            .split('')
+            .map((c) => {
+              return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join('')
+        );
+
+        const payload = JSON.parse(jsonPayload);
+        this.userId = payload.id; // Récupère l'ID de l'utilisateur
+      } catch (error) {
+        console.error('Erreur lors du décodage du token JWT', error);
+      }
+    }
+  }
+
+  openDeleteModal(experienceId: number ) {
+    this.experienceToDeleteId = experienceId;
+    this.deleteModal.open();
+  }
+
+  confirmExperienceDelete(id: number) {
+    this.filteredCountries = this.filteredCountries.filter(exp => exp.id !== id);
+    this.deleteModal.close();
+  }
+
+  cancelExperienceDelete() {
+    this.deleteModal.close();
+  }
+
+
   onSearchCountries(searchInfos: string) {
-    console.log('Recherche pour :', searchInfos);
     if (searchInfos) {
       this.filteredCountries = this.allExperiences.filter((exp) => {
         // Vérifier si la recherche correspond au mot "Roadtrip"
@@ -70,7 +132,6 @@ export class ExperiencesComponent implements OnInit {
     } else {
       this.filteredCountries = [...this.allExperiences];
     }
-    console.log('Résultats du filtre :', this.filteredCountries);
   }
 
   isUserLoggedIn(): boolean {
@@ -89,14 +150,4 @@ export class ExperiencesComponent implements OnInit {
       }
     }
   }
-
-  // navigateOtherPage(idExperience: number | undefined) {
-  //   if (idExperience) {
-  //     this.router.navigate([`/experience-user`], {
-  //       queryParams: { id: idExperience },
-  //     });
-  //     this.urlService.myPreviousUrl = '/experience';
-  //     this.urlService.myCurrentUrl = '/experience-user';
-  //   }
-  // }
 }

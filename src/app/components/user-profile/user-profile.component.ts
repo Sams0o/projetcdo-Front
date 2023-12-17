@@ -86,7 +86,6 @@ export class UserProfileComponent implements OnInit {
       this.userExperiences[indexToUpdate] = updatedExperience;
       this.userExperiences = [...this.userExperiences];
       this.userExperiences = this.getDataUserProfil();
-      // this.experienceService.updateExperiences(this.userExperiences);
     }
     this.userExperiences = this.getDataUserProfil();
     this.experienceService.updateExperiences(this.userExperiences);
