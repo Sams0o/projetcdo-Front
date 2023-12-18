@@ -33,8 +33,20 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('ngOnInit de UserProfileComponent appelé');
     this.getDataUserProfil();
-    this.experienceService.updateExperiences(this.userExperiences);
+    this.experienceService.experienceRefresh$.subscribe(() => {
+      this.getDataUserProfil();
+    });
+  }
+
+  getDataUserProfil() {
+    console.log('getDataUserProfil appelé');
+    this.userService.getUserById().subscribe((data) => {
+      this.user = data;
+      this.userExperiences = data.experiences;
+      console.log('User data récupérées:', data);
+    });
   }
 
   // Pour afficher le modal de création d'experience
@@ -43,28 +55,9 @@ export class UserProfileComponent implements OnInit {
     dialog?.showModal();
   }
 
-  getDataUserProfil() {
-    this.userService.getUserById().subscribe((data) => {
-      this.user = data;
-      this.userExperiences = data.experiences;
-    });
-    return this.userExperiences;
-  }
-  // Lien qui permet à l'utilisateur de modifier ses données personnelles
-  settings() {
-    this.router.navigate(['/profil/user-profile/settings']);
-  }
-
-  // Pour la déconnexion de l'utilisateur
-  logout() {
-    this.userService.logout();
-  }
-
   // Pour ouvrir la modal de modification
   openEditDialog(experience: Experience) {
- 
     if (this.editModal) {
-
       this.editModal.open(experience);
     }
     const dialog = document.getElementById(
@@ -75,7 +68,6 @@ export class UserProfileComponent implements OnInit {
 
   // Gérer la MàJ de l'expérience utilisateur
   experienceUpdated(updatedExperience: Experience) {
-
     // trouver l'index de l'expérience qui a été MàJ
     const indexToUpdate = this.userExperiences.findIndex(
       (exp) => exp.id === updatedExperience.id
@@ -85,9 +77,7 @@ export class UserProfileComponent implements OnInit {
     if (indexToUpdate !== -1) {
       this.userExperiences[indexToUpdate] = updatedExperience;
       this.userExperiences = [...this.userExperiences];
-      this.userExperiences = this.getDataUserProfil();
     }
-    this.userExperiences = this.getDataUserProfil();
     this.experienceService.updateExperiences(this.userExperiences);
   }
 
@@ -111,21 +101,32 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSearchCountries(searchInfos: string) {
-    
     if (searchInfos) {
-       this.filteredCountries = this.userExperiences.filter((exp) => {
-         // Vérifier si "roadtrip" commence par la chaîne recherchée
-         const isRoadtripSearch = 'roadtrip'.startsWith(searchInfos.toLowerCase());
+      this.filteredCountries = this.userExperiences.filter((exp) => {
+        // Vérifier si "roadtrip" commence par la chaîne recherchée
+        const isRoadtripSearch = 'roadtrip'.startsWith(
+          searchInfos.toLowerCase()
+        );
 
-         // Filtre pour "Roadtrip" ou pays spécifique
-         return isRoadtripSearch && exp.countries.length > 1
-           ? true
-           : exp.countries.some((country) =>
-               country.name.toLowerCase().includes(searchInfos.toLowerCase())
-             );
-       });
+        // Filtre pour "Roadtrip" ou pays spécifique
+        return isRoadtripSearch && exp.countries.length > 1
+          ? true
+          : exp.countries.some((country) =>
+              country.name.toLowerCase().includes(searchInfos.toLowerCase())
+            );
+      });
     } else {
       this.filteredCountries = [...this.userExperiences];
     }
+  }
+
+  // Lien qui permet à l'utilisateur de modifier ses données personnelles
+  settings() {
+    this.router.navigate(['/profil/user-profile/settings']);
+  }
+
+  // Pour la déconnexion de l'utilisateur
+  logout() {
+    this.userService.logout();
   }
 }

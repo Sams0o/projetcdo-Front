@@ -90,12 +90,11 @@ export class CreateExperienceComponent implements OnInit {
       };
 
       this.experienceService.createExperience(experienceData).subscribe({
-        next: (res) => {
+        next: () => {
           this.toast.success('L\'expérience a été créée avec succès', 'Créer une expérience');
           this.close();
-           setTimeout(() => {location.reload();}, 3000);
         },
-        error: (error) => {
+        error: () => {
           this.toast.error('Un problème est survenu lors de la création de l\'expérience', 'Erreur');
         },
       });

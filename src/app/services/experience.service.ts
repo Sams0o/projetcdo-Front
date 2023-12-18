@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { Experience } from '../models/experience';
 
 @Injectable({
@@ -8,19 +8,24 @@ import { Experience } from '../models/experience';
 })
 export class ExperienceService {
   private experiencesSource = new BehaviorSubject<Experience[]>([]);
-  public experiences = this.experiencesSource.asObservable();
+  public experiences$ = this.experiencesSource.asObservable();
+
+  private experienceRefreshSource = new Subject<void>();
+  experienceRefresh$ = this.experienceRefreshSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  updateExperiences(experiences: Experience[]) {
-    this.experiencesSource.next(experiences);
-  }
   setHeaders() {
     const jwtToken = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${jwtToken}`,
     });
     return headers;
+  }
+
+  updateExperiences(experiences: Experience[]) {
+    this.experiencesSource.next(experiences);
+    console.log('Mise à jour des expériences avec:', experiences);
   }
 
   getExperiences(): Observable<Experience[]> {
@@ -37,11 +42,15 @@ export class ExperienceService {
   }
 
   createExperience(experience: Experience) {
-    return this.http.post<Experience>(
-      'http://localhost:3000/api/experiences',
-      experience,
-      { headers: this.setHeaders() }
-    );
+    return this.http
+      .post<Experience>('http://localhost:3000/api/experiences', experience, {
+        headers: this.setHeaders(),
+      })
+      .pipe(
+        tap(() => {
+          this.experienceRefreshSource.next();
+        })
+      );
   }
 
   updateExperience(experience: Experience): Observable<Experience> {

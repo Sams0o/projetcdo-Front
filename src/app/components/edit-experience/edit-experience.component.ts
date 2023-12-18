@@ -6,7 +6,6 @@ import { Experience } from 'src/app/models/experience';
 import { CategoryService } from 'src/app/services/category.service';
 import { CountryService } from 'src/app/services/country.service';
 import { ExperienceService } from 'src/app/services/experience.service';
-import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -94,10 +93,6 @@ export class EditExperienceComponent {
       'editExperienceDialog'
     ) as HTMLDialogElement;
     dialog?.close();
-
-    // Réinitialiser les messages quand le dialogue est fermé
-    this.successMessage = null;
-    this.errorMessage = null;
   }
 
   // OnSubmit appelé lors de la soumission du formulaire
@@ -132,10 +127,6 @@ export class EditExperienceComponent {
             "L'expérience a été mise à jour avec succès.",
             'Modifier une expérience'
           );
-          this.successMessage = "L'expérience a été mise à jour avec succès.";
-          setTimeout(() => {
-            this.successMessage = null; 
-          }, 3000);
           this.close();
 
           const id = updatedExperience.id;
@@ -147,8 +138,6 @@ export class EditExperienceComponent {
             "Un problème est survenu lors de la modification de l'expérience",
             'Erreur'
           );
-          this.errorMessage = "Erreur lors de la mise à jour de l'expérience";
-          setTimeout(() => (this.errorMessage = null), 3000);
         },
       });
     }
