@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component} from '@angular/core';
 import { UrlService } from './services/url.service';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',

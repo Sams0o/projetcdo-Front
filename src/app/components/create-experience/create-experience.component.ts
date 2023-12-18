@@ -87,7 +87,7 @@ export class CreateExperienceComponent implements OnInit {
         travel_date: formValue.travel_date,
         countries: transformedCountries,
         categories: transformedCategories,
-      };
+      }; 
 
       this.experienceService.createExperience(experienceData).subscribe({
         next: () => {
